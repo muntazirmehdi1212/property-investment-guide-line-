@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PropMaster Pro — Complete Property Company Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold:    #c9a84c;
+  --gold2:   #e8c97a;
+  --gold3:   rgba(201,168,76,0.15);
+  --dark:    #080a0e;
+  --dark2:   #0e1117;
+  --dark3:   #141820;
+  --dark4:   #1a2030;
+  --border:  rgba(201,168,76,0.18);
+  --border2: rgba(201,168,76,0.08);
+  --text:    #e8e0d0;
+  --muted:   #7a7060;
+  --white:   #f5f0e8;
+  --red:     #c94c4c;
+  --green:   #4caa6e;
+  --blue:    #4c7ac9;
+  --display: 'Cormorant Garamond', serif;
+  --body:    'Montserrat', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 260px;
+  background: var(--dark2);
+  border-right: 1px solid var(--border);
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar::-webkit-scrollbar { width: 2px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--gold); }
+
+.sidebar-brand { padding: 28px 24px 20px; border-bottom: 1px solid var(--border2); }
+
+.brand-icon {
+  width: 38px; height: 38px;
+  background: var(--gold);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--dark); margin-bottom: 10px; font-weight: 700;
+}
+
+.brand-name {
+  font-family: var(--display);
+  font-size: 1.25rem; font-weight: 700; color: var(--white);
+  letter-spacing: 0.04em; line-height: 1.1;
+}
+
+.brand-tagline {
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  color: var(--gold); text-transform: uppercase; margin-top: 3px;
+}
+
+.nav-section-label {
+  font-size: 0.6rem; letter-spacing: 0.22em;
+  color: var(--muted); text-transform: uppercase; padding: 18px 24px 6px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 24px; cursor: pointer; transition: all 0.2s;
+  border-left: 2px solid transparent; text-decoration: none;
+  color: var(--muted); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em;
+}
+.nav-item:hover { color: var(--gold2); background: var(--gold3); border-left-color: var(--gold); }
+.nav-item.active { color: var(--gold2); background: var(--gold3); border-left-color: var(--gold); }
+
+.nav-item .nav-num {
+  font-family: var(--display); font-size: 1rem; color: var(--border);
+  font-weight: 600; transition: color 0.2s; min-width: 20px;
+}
+.nav-item:hover .nav-num, .nav-item.active .nav-num { color: var(--gold); }
+
+.sidebar-footer {
+  margin-top: auto; padding: 20px 24px; border-top: 1px solid var(--border2);
+  font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase;
+}
+
+#menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  background: var(--gold); border: none; color: var(--dark);
+  width: 38px; height: 38px; border-radius: 4px; font-size: 1.1rem; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+
+/* ── MAIN ── */
+#main { margin-left: 260px; min-height: 100vh; }
+
+/* ── HERO ── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 60px; overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 50%),
+    linear-gradient(160deg, #0a0c12 0%, #080a0e 100%);
+}
+
+.hero-grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
+
+.hero-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.35em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 700; line-height: 1.0;
+  letter-spacing: 0.02em; color: var(--white); margin-bottom: 16px;
+}
+.hero-title .gold { color: var(--gold); }
+
+.hero-desc {
+  font-size: 0.88rem; color: var(--muted);
+  max-width: 520px; line-height: 1.8; font-weight: 300; margin-bottom: 40px;
+}
+
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 48px; }
+
+.hero-stat { display: flex; flex-direction: column; gap: 2px; }
+
+.stat-num {
+  font-family: var(--display); font-size: 2rem;
+  font-weight: 700; color: var(--gold2); line-height: 1;
+}
+
+.stat-label { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-primary {
+  padding: 13px 28px; background: var(--gold); color: var(--dark);
+  font-family: var(--body); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; border: none;
+  cursor: pointer; text-decoration: none; border-radius: 2px;
+  transition: all 0.25s; display: inline-block;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+
+.btn-outline {
+  padding: 13px 28px; background: transparent; color: var(--gold);
+  font-family: var(--body); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--border);
+  cursor: pointer; text-decoration: none; border-radius: 2px;
+  transition: all 0.25s; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--gold); background: var(--gold3); }
+
+.hero-decor {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+  display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+
+.building-svg { opacity: 0.06; width: 100%; max-width: 500px; }
+
+/* ── SECTIONS ── */
+.section {
+  padding: 80px 60px; border-bottom: 1px solid var(--border2); position: relative;
+}
+.section:nth-child(even) { background: var(--dark2); }
+
+.section-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 48px; }
+
+.section-num-big {
+  font-family: var(--display); font-size: 4rem; font-weight: 700;
+  color: var(--border2); line-height: 1; flex-shrink: 0;
+}
+
+.section-title-group { flex: 1; }
+
+.section-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 700; color: var(--white); letter-spacing: 0.02em; line-height: 1.1;
+}
+
+.section-sub {
+  font-size: 0.82rem; color: var(--muted); margin-top: 6px;
+  font-style: italic; font-family: var(--display); letter-spacing: 0.04em;
+}
+
+.gold-divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 16px 0 28px;
+}
+
+/* ── CARDS ── */
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; margin-bottom: 32px;
+}
+
+.card {
+  background: var(--dark3); border: 1px solid var(--border2);
+  border-radius: 4px; padding: 24px; position: relative;
+  overflow: hidden; transition: all 0.3s;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.card:hover { border-color: var(--border); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.card:hover::before { transform: scaleX(1); }
+
+.card-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
+
+.card-title {
+  font-family: var(--display); font-size: 1.15rem; font-weight: 600;
+  color: var(--white); margin-bottom: 8px; letter-spacing: 0.02em;
+}
+
+.card-sub {
+  font-size: 0.65rem; letter-spacing: 0.12em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 10px; font-weight: 600;
+}
+
+.card-text { font-size: 0.78rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── STEP FLOW ── */
+.step-flow { position: relative; padding-left: 48px; }
+.step-flow::before {
+  content: ''; position: absolute; left: 18px; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(180deg, var(--gold), transparent);
+}
+
+.step {
+  position: relative; margin-bottom: 28px;
+  opacity: 0; transform: translateX(-8px); transition: all 0.4s ease;
+}
+.step.visible { opacity: 1; transform: translateX(0); }
+
+.step::before {
+  content: attr(data-num);
+  position: absolute; left: -42px; top: 2px;
+  width: 28px; height: 28px; background: var(--dark);
+  border: 1px solid var(--gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 0.85rem; font-weight: 700;
+  color: var(--gold); text-align: center; line-height: 26px;
+}
+
+.step-title { font-weight: 600; font-size: 0.9rem; color: var(--white); margin-bottom: 4px; }
+.step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+.step-note {
+  margin-top: 8px; padding: 10px 14px;
+  background: rgba(201,168,76,0.06); border-left: 2px solid var(--gold);
+  font-size: 0.75rem; color: var(--gold2); border-radius: 0 3px 3px 0;
+}
+
+/* ── TABLES ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-bottom: 28px; }
+
+.data-table thead th {
+  padding: 12px 16px; text-align: left; font-size: 0.62rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  border-bottom: 1px solid var(--border); background: var(--dark4); font-weight: 600;
+}
+
+.data-table tbody tr { border-bottom: 1px solid var(--border2); transition: background 0.15s; }
+.data-table tbody tr:hover { background: rgba(201,168,76,0.03); }
+
+.data-table td {
+  padding: 12px 16px; color: var(--text); vertical-align: top; line-height: 1.5;
+}
+.data-table td:first-child { color: var(--white); font-weight: 500; }
+.data-table td:last-child { color: var(--muted); }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 2px;
+  font-size: 0.62rem; letter-spacing: 0.1em; font-weight: 600; text-transform: uppercase;
+}
+.badge-green { background: rgba(76,170,110,0.15); color: #6ee7a0; border: 1px solid rgba(76,170,110,0.3); }
+.badge-red   { background: rgba(201,76,76,0.12);  color: #fca5a5; border: 1px solid rgba(201,76,76,0.25); }
+.badge-gold  { background: rgba(201,168,76,0.12); color: var(--gold2); border: 1px solid var(--border); }
+.badge-blue  { background: rgba(76,122,201,0.12); color: #93c5fd; border: 1px solid rgba(76,122,201,0.25); }
+
+/* ── CALC BOX ── */
+.calc-box {
+  background: var(--dark4); border: 1px solid var(--border); border-radius: 6px;
+  padding: 28px; margin: 24px 0; position: relative; overflow: hidden;
+}
+.calc-box::after {
+  content: '₨'; position: absolute; right: 20px; top: 10px;
+  font-family: var(--display); font-size: 6rem;
+  color: rgba(201,168,76,0.04); pointer-events: none; line-height: 1;
+}
+
+.calc-title {
+  font-family: var(--display); font-size: 1.1rem; font-weight: 700;
+  color: var(--gold2); margin-bottom: 16px; letter-spacing: 0.04em;
+}
+
+.calc-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid var(--border2); font-size: 0.8rem;
+}
+.calc-row:last-child { border-bottom: none; }
+
+.calc-label { color: var(--muted); }
+.calc-val { color: var(--text); font-weight: 500; font-family: 'Courier New', monospace; }
+.calc-val.positive { color: #6ee7a0; }
+.calc-val.negative { color: #fca5a5; }
+.calc-val.gold { color: var(--gold2); font-size: 1rem; }
+.calc-divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+/* ── RISK MATRIX ── */
+.risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+
+.risk-card { padding: 20px; border-radius: 4px; border: 1px solid; position: relative; }
+.risk-card.high   { border-color: rgba(201,76,76,0.3);  background: rgba(201,76,76,0.05);  }
+.risk-card.medium { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
+.risk-card.low    { border-color: rgba(76,170,110,0.3); background: rgba(76,170,110,0.05); }
+
+.risk-level { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+.risk-card.high .risk-level   { color: #fca5a5; }
+.risk-card.medium .risk-level { color: var(--gold2); }
+.risk-card.low .risk-level    { color: #6ee7a0; }
+
+.risk-title { font-weight: 600; font-size: 0.85rem; color: var(--white); margin-bottom: 6px; }
+.risk-desc  { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+/* ── ROADMAP ── */
+.roadmap {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin: 28px 0; position: relative;
+}
+.roadmap::before {
+  content: ''; position: absolute; top: 24px; left: 12.5%; right: 12.5%;
+  height: 1px; background: var(--gold);
+}
+
+.roadmap-item {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 16px 24px; text-align: center; position: relative;
+}
+
+.roadmap-dot {
+  width: 48px; height: 48px; border: 2px solid var(--gold);
+  border-radius: 50%; background: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 1.1rem; font-weight: 700;
+  color: var(--gold); margin-bottom: 16px; position: relative; z-index: 1; transition: all 0.3s;
+}
+.roadmap-item:hover .roadmap-dot { background: var(--gold); color: var(--dark); box-shadow: 0 0 20px rgba(201,168,76,0.4); }
+
+.roadmap-period { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+.roadmap-title  { font-weight: 600; font-size: 0.82rem; color: var(--white); margin-bottom: 8px; }
+.roadmap-desc   { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
+
+/* ── PROFIT BARS ── */
+.profit-bars { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+
+.pbar { display: flex; align-items: center; gap: 16px; }
+.pbar-label { min-width: 200px; font-size: 0.75rem; color: var(--text); }
+
+.pbar-track { flex: 1; height: 8px; background: var(--dark4); border-radius: 4px; overflow: hidden; }
+
+.pbar-fill {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  width: 0; transition: width 1.2s cubic-bezier(.22,1,.36,1);
+}
+
+.pbar-val { min-width: 60px; text-align: right; font-size: 0.78rem; color: var(--gold2); font-family: 'Courier New', monospace; font-weight: 700; }
+
+/* ── INFO BOXES ── */
+.info-box {
+  padding: 16px 20px; border-radius: 3px; margin: 16px 0;
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 0.78rem; line-height: 1.6;
+}
+.info-box.tip     { background: rgba(201,168,76,0.07); border-left: 3px solid var(--gold); }
+.info-box.warning { background: rgba(201,76,76,0.07);  border-left: 3px solid #c94c4c; }
+.info-box.success { background: rgba(76,170,110,0.07); border-left: 3px solid #4caa6e; }
+.info-box.info    { background: rgba(76,122,201,0.07); border-left: 3px solid #4c7ac9; }
+
+.info-box-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+.info-box-text { flex: 1; }
+.info-box-text strong { display: block; margin-bottom: 3px; color: var(--white); }
+.info-box.tip .info-box-text     { color: var(--gold2); }
+.info-box.warning .info-box-text { color: #fca5a5; }
+.info-box.success .info-box-text { color: #86efac; }
+.info-box.info .info-box-text    { color: #93c5fd; }
+
+/* ── TABS ── */
+.tabs { margin-bottom: 28px; }
+
+.tab-bar {
+  display: flex; gap: 0; border-bottom: 1px solid var(--border);
+  margin-bottom: 24px; flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 20px; background: transparent; border: none;
+  color: var(--muted); font-family: var(--body); font-size: 0.72rem;
+  font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--gold2); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── INTERACTIVE CALC ── */
+.interactive-calc {
+  background: var(--dark3); border: 1px solid var(--border); border-radius: 6px;
+  padding: 28px; margin: 24px 0;
+}
+
+.calc-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 600px) { .calc-form { grid-template-columns: 1fr; } }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.62rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+
+.form-input {
+  padding: 10px 14px; background: var(--dark4); border: 1px solid var(--border2);
+  border-radius: 3px; color: var(--white); font-family: var(--body);
+  font-size: 0.85rem; transition: border-color 0.2s; outline: none;
+}
+.form-input:focus { border-color: var(--gold); }
+
+.calc-output {
+  background: var(--dark4); border: 1px solid var(--border); border-radius: 4px; padding: 20px; margin-top: 16px;
+}
+
+.output-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 600px) { .output-grid { grid-template-columns: 1fr; } }
+
+.output-item { text-align: center; }
+.output-label { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+.output-val { font-family: var(--display); font-size: 1.3rem; font-weight: 700; color: var(--gold2); }
+
+/* ── CHECKLIST ── */
+.checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+
+.check-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; background: var(--dark3); border: 1px solid var(--border2);
+  border-radius: 3px; cursor: pointer; transition: all 0.2s; user-select: none;
+}
+.check-item:hover { border-color: var(--border); }
+.check-item.checked { background: rgba(201,168,76,0.05); border-color: var(--border); }
+
+.check-box {
+  width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 2px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; color: var(--gold); transition: all 0.2s; margin-top: 1px;
+}
+.check-item.checked .check-box { background: var(--gold); border-color: var(--gold); color: var(--dark); }
+
+.check-text { font-size: 0.78rem; color: var(--text); line-height: 1.4; }
+.check-item.checked .check-text { color: var(--muted); text-decoration: line-through; }
+
+/* ── LAYOUTS ── */
+.two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .three-col { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .three-col { grid-template-columns: 1fr; } }
+
+.accent-quote {
+  border-left: 3px solid var(--gold); padding: 12px 20px; margin: 24px 0;
+  font-family: var(--display); font-style: italic; font-size: 1.05rem;
+  color: var(--gold2); background: rgba(201,168,76,0.04);
+}
+.accent-quote cite {
+  display: block; font-family: var(--body); font-style: normal;
+  font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted);
+  text-transform: uppercase; margin-top: 6px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+  #sidebar.open { transform: translateX(0); }
+  #main { margin-left: 0; }
+  #menu-toggle { display: flex; }
+  #hero { padding: 80px 28px 60px; }
+  .section { padding: 60px 28px; }
+  .roadmap { grid-template-columns: 1fr 1fr; }
+  .roadmap::before { display: none; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 2.4rem; }
+  .roadmap { grid-template-columns: 1fr; }
+}
+
+.fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+<body>
+
+<button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">P</div>
+    <div class="brand-name">PropMaster Pro</div>
+    <div class="brand-tagline">Pakistan Property Guide</div>
+  </div>
+
+  <div class="nav-section-label">Main Sections</div>
+  <a href="#hero"      class="nav-item active"><span class="nav-num">✦</span> Overview</a>
+  <a href="#s1"        class="nav-item"><span class="nav-num">01</span> Company Formation</a>
+  <a href="#s2"        class="nav-item"><span class="nav-num">02</span> Investment Strategy</a>
+  <a href="#s3"        class="nav-item"><span class="nav-num">03</span> Sale &amp; Purchase</a>
+  <a href="#s4"        class="nav-item"><span class="nav-num">04</span> Daily Operations</a>
+  <a href="#s5"        class="nav-item"><span class="nav-num">05</span> Marketing Strategy</a>
+  <a href="#s6"        class="nav-item"><span class="nav-num">06</span> Profit Model</a>
+  <a href="#s7"        class="nav-item"><span class="nav-num">07</span> Risk Management</a>
+  <a href="#s8"        class="nav-item"><span class="nav-num">08</span> Growth Plan</a>
+
+  <div class="nav-section-label">Tools</div>
+  <a href="#calc"      class="nav-item"><span class="nav-num">₨</span> Commission Calc</a>
+  <a href="#checklist" class="nav-item"><span class="nav-num">✓</span> Due Diligence</a>
+
+  <div class="sidebar-footer">Pakistan Real Estate Guide © 2025</div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Professional Real Estate Guide</div>
+    <h1 class="hero-title">Property<br><span class="gold">Company</span><br>Master Guide</h1>
+    <p class="hero-desc">A complete professional framework for starting and running a real estate company in Pakistan — from company registration to profit maximization, legal compliance to daily operations.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-num">8</span><span class="stat-label">Core Modules</span></div>
+      <div class="hero-stat"><span class="stat-num">50+</span><span class="stat-label">Action Steps</span></div>
+      <div class="hero-stat"><span class="stat-num">PKR</span><span class="stat-label">Pakistan Focused</span></div>
+      <div class="hero-stat"><span class="stat-num">100%</span><span class="stat-label">Practical</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#s1" class="btn-primary">Start Reading →</a>
+      <a href="#calc" class="btn-outline">Commission Calculator</a>
+    </div>
+  </div>
+  <div class="hero-decor">
+    <svg class="building-svg" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="60" y="80" width="120" height="400" stroke="#c9a84c" stroke-width="1.5"/>
+      <rect x="220" y="140" width="100" height="340" stroke="#c9a84c" stroke-width="1.5"/>
+      <rect x="170" y="200" width="40" height="280" stroke="#c9a84c" stroke-width="1"/>
+      <rect x="80" y="100" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="108" y="100" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="136" y="100" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="80" y="140" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="108" y="140" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="136" y="140" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <rect x="80" y="180" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="108" y="180" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="136" y="180" width="16" height="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="236" y="160" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="260" y="160" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="284" y="160" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <rect x="236" y="196" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <rect x="260" y="196" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <rect x="284" y="196" width="14" height="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+      <line x1="60" y1="480" x2="320" y2="480" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
+      <rect x="110" y="400" width="60" height="80" stroke="#c9a84c" stroke-width="1" opacity="0.8"/>
+      <line x1="140" y1="400" x2="140" y2="480" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ S1: COMPANY FORMATION ═══════ -->
+<section class="section fade-up" id="s1">
+  <div class="section-header">
+    <div class="section-num-big">01</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Foundation</div>
+      <h2 class="section-title">Company Formation</h2>
+      <div class="section-sub">How to legally structure and register your property business in Pakistan</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="card-grid fade-up">
+    <div class="card">
+      <span class="card-icon">🏢</span>
+      <div class="card-title">Property Dealer</div>
+      <div class="card-sub">Most Common Model</div>
+      <div class="card-text">Act as the intermediary between buyers and sellers. Commission-based income — the most popular starting model in Pakistan. No large capital required. Starting cost: PKR 5–10 lakh.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">💼</span>
+      <div class="card-title">Property Investor</div>
+      <div class="card-sub">Capital Required</div>
+      <div class="card-text">Purchase properties with your own capital, then hold or flip for profit. Excellent for long-term wealth building. Requires PKR 50 lakh+ to start meaningfully.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">Property Developer</div>
+      <div class="card-sub">High Risk / High Reward</div>
+      <div class="card-text">Acquire land, construct, and sell. Highest profit margins but also highest risk. Requires NOC approvals, layout plans, and a minimum PKR 1 crore+ in starting capital.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">Brokerage Firm</div>
+      <div class="card-sub">Team-Based</div>
+      <div class="card-text">A professional brokerage house with multiple agents, a brand identity, and structured operations. Office + team setup cost: PKR 20–30 lakh. Scale through staff commission splits.</div>
+    </div>
+  </div>
+
+  <div class="tabs fade-up">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this,'reg')">Registration</button>
+      <button class="tab-btn" onclick="switchTab(this,'docs')">Documents</button>
+      <button class="tab-btn" onclick="switchTab(this,'team')">Team Structure</button>
+      <button class="tab-btn" onclick="switchTab(this,'office')">Office Setup</button>
+    </div>
+
+    <!-- Registration -->
+    <div class="tab-content active" id="tab-reg">
+      <div class="step-flow">
+        <div class="step" data-num="1">
+          <div class="step-title">SECP Registration (Private Ltd) or Sole Proprietorship</div>
+          <div class="step-desc">Sole Proprietorship: Obtain a trade license from the local council with your NTN. Private Limited: Register via the SECP portal — minimum 2 directors, PKR 1 lakh share capital. SECP fee: PKR 1,000–5,000.</div>
+          <div class="step-note">💡 Tip: Sole Proprietorship is the best starting point. Convert to Pvt Ltd once you have 5+ employees and substantial revenue.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">National Tax Number (NTN) — FBR</div>
+          <div class="step-desc">Register your NTN on the FBR website at no cost. You will need your CNIC, a business bank account, and your business address. Annual tax return filing is mandatory for all registered businesses.</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">RERA License — Real Estate Regulatory Authority</div>
+          <div class="step-desc">Apply for a dealer or agent license from Punjab RERA or the relevant provincial authority. License fee: PKR 10,000–50,000. Renewal is required annually. Operating without a RERA license is illegal.</div>
+        </div>
+        <div class="step" data-num="4">
+          <div class="step-title">Trade License — Local Municipal Council</div>
+          <div class="step-desc">Apply at the Union Council or City District Government for your area. Annual fee: PKR 2,000–8,000. Required for all commercial businesses operating within a municipality.</div>
+        </div>
+        <div class="step" data-num="5">
+          <div class="step-title">Business Bank Account</div>
+          <div class="step-desc">Open a current business account at HBL, Meezan, UBL, or MCB. Required documents: company registration, NTN, RERA license, directors' CNICs. All commission payments should flow through this account for tax compliance.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents -->
+    <div class="tab-content" id="tab-docs">
+      <table class="data-table">
+        <thead><tr><th>Document</th><th>Purpose</th><th>Where to Obtain</th><th>Approximate Cost</th></tr></thead>
+        <tbody>
+          <tr><td>CNIC (All Founders)</td><td>Identity verification</td><td>NADRA Office</td><td>Free</td></tr>
+          <tr><td>NTN Certificate</td><td>Tax registration number</td><td>FBR.gov.pk (online)</td><td>Free</td></tr>
+          <tr><td>RERA License</td><td>Legal authority to deal in property</td><td>Punjab / Sindh RERA</td><td>PKR 10,000–50,000</td></tr>
+          <tr><td>Trade License</td><td>Authorization to operate a business</td><td>Local Municipal Council</td><td>PKR 2,000–8,000</td></tr>
+          <tr><td>SECP Incorporation Certificate</td><td>Official company registration</td><td>SECP Online Portal</td><td>PKR 1,000–5,000</td></tr>
+          <tr><td>Office Lease Agreement</td><td>Proof of business address</td><td>Notarized from landlord</td><td>Per rental rate</td></tr>
+          <tr><td>Stamp Paper Agreements</td><td>Client contracts and deeds</td><td>Court stamp vendor</td><td>PKR 200–500 each</td></tr>
+          <tr><td>Company Letterhead</td><td>Official correspondence</td><td>Printing press</td><td>PKR 500–2,000</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box warning">
+        <span class="info-box-icon">⚠️</span>
+        <div class="info-box-text"><strong>Legal Warning</strong>Handling any client funds without a valid RERA license is a criminal offense under Pakistani real estate law. Always operate through a registered platform and maintain clear financial records.</div>
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div class="tab-content" id="tab-team">
+      <div class="card-grid">
+        <div class="card"><span class="card-icon">👔</span><div class="card-title">CEO / Owner</div><div class="card-text">Business strategy, high-value client relationships, and major deal supervision. Compensation: 40–60% profit share from company earnings.</div></div>
+        <div class="card"><span class="card-icon">🏠</span><div class="card-title">Sales Agents (2–4)</div><div class="card-text">Property viewings, client meetings, and deal closure. Salary: PKR 25,000–40,000 base + 20–30% of commission per closed deal.</div></div>
+        <div class="card"><span class="card-icon">⚖️</span><div class="card-title">Legal Advisor</div><div class="card-text">Title verification, sale deed drafting, and registry supervision. Engagement: Part-time retainer at PKR 15,000–25,000/month.</div></div>
+        <div class="card"><span class="card-icon">📱</span><div class="card-title">Marketing Executive</div><div class="card-text">Social media management, paid advertising campaigns, and lead generation. Salary: PKR 30,000–45,000/month.</div></div>
+        <div class="card"><span class="card-icon">📊</span><div class="card-title">Accountant</div><div class="card-text">Bookkeeping, tax return filing, and cash flow management. Part-time engagement: PKR 10,000–15,000/month.</div></div>
+        <div class="card"><span class="card-icon">📞</span><div class="card-title">Receptionist / CRM Manager</div><div class="card-text">Lead management, appointment scheduling, and follow-up calls. Salary: PKR 20,000–30,000/month.</div></div>
+      </div>
+    </div>
+
+    <!-- Office -->
+    <div class="tab-content" id="tab-office">
+      <div class="two-col">
+        <div>
+          <div class="calc-box">
+            <div class="calc-title">Office Setup Budget — Entry Level</div>
+            <div class="calc-row"><span class="calc-label">Office Rent (1 room, upscale area)</span><span class="calc-val">PKR 25,000/month</span></div>
+            <div class="calc-row"><span class="calc-label">Furniture (desks, chairs, client sofa)</span><span class="calc-val">PKR 80,000</span></div>
+            <div class="calc-row"><span class="calc-label">Computer + Printer + CCTV</span><span class="calc-val">PKR 70,000</span></div>
+            <div class="calc-row"><span class="calc-label">Signboard + Branding</span><span class="calc-val">PKR 25,000</span></div>
+            <div class="calc-row"><span class="calc-label">Internet + Utilities</span><span class="calc-val">PKR 5,000/month</span></div>
+            <div class="calc-row"><span class="calc-label">Legal + Registration Fees</span><span class="calc-val">PKR 60,000</span></div>
+            <div class="calc-divider"></div>
+            <div class="calc-row"><span class="calc-label">Total Initial Setup Cost</span><span class="calc-val gold">PKR 2.35 Lakh</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="info-box success">
+            <span class="info-box-icon">✅</span>
+            <div class="info-box-text"><strong>Ideal Office Location</strong>Defence, Bahria Town entry zones, DHA, or any prominent main market strip of an upscale housing society. Visibility and foot traffic are essential for a property office.</div>
+          </div>
+          <div class="info-box tip">
+            <span class="info-box-icon">💡</span>
+            <div class="info-box-text"><strong>Pro Tip</strong>A single-room office is sufficient to start. Move to a larger space only after consistently closing 12–15 deals per month. A virtual office address is also viable in the early stages.</div>
+          </div>
+          <div class="info-box info">
+            <span class="info-box-icon">🖥️</span>
+            <div class="info-box-text"><strong>Essential Software Stack</strong>Zameen.com / OLX Pro listings, a CRM system (HubSpot Free or locally built), WhatsApp Business, and Canva Pro for marketing materials.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ S2: INVESTMENT STRATEGY ═══════ -->
+<section class="section fade-up" id="s2">
+  <div class="section-header">
+    <div class="section-num-big">02</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Strategy</div>
+      <h2 class="section-title">Investment Strategy</h2>
+      <div class="section-sub">Short-term flipping, long-term rentals, and high-ROI area selection</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="accent-quote fade-up">
+    "Real estate is not about buying property — it is about buying opportunity at the right time, the right location, and the right price."
+    <cite>— Pakistan Property Investment Principle</cite>
+  </div>
+
+  <div class="two-col fade-up">
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.3rem;color:var(--white);margin-bottom:16px;letter-spacing:0.04em;">Short-Term Flipping Strategy</h3>
+      <div class="step-flow">
+        <div class="step" data-num="1">
+          <div class="step-title">Identify an Under-Valued Property</div>
+          <div class="step-desc">Look for properties priced 10–15% below market value. Target motivated sellers — those dealing with divorce settlements, emigration, or urgent debt needs.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">Complete Quick Due Diligence</div>
+          <div class="step-desc">Confirm clear title, no legal disputes, and proper road access. Complete this process within 3–5 days before making an offer.</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">Purchase and Hold 6–12 Months</div>
+          <div class="step-desc">Wait for market appreciation or add minor value improvements such as a boundary wall, gate, or road pavement to increase perceived value.</div>
+        </div>
+        <div class="step" data-num="4">
+          <div class="step-title">Sell at 20–35% Profit</div>
+          <div class="step-desc">Deduct all transaction costs including dealer commission and capital gains tax to calculate your true net profit.</div>
+        </div>
+      </div>
+      <div class="calc-box">
+        <div class="calc-title">Flip Example — Lahore DHA Phase 6</div>
+        <div class="calc-row"><span class="calc-label">Purchase Price (1 Kanal Plot)</span><span class="calc-val negative">PKR 2.80 Crore</span></div>
+        <div class="calc-row"><span class="calc-label">Stamp Duty + Transfer Fees</span><span class="calc-val negative">PKR 12 Lakh</span></div>
+        <div class="calc-row"><span class="calc-label">Boundary Wall (improvement)</span><span class="calc-val negative">PKR 3 Lakh</span></div>
+        <div class="calc-row"><span class="calc-label">Total Investment</span><span class="calc-val negative">PKR 2.95 Crore</span></div>
+        <div class="calc-divider"></div>
+        <div class="calc-row"><span class="calc-label">Sale Price (after 10 months)</span><span class="calc-val positive">PKR 3.60 Crore</span></div>
+        <div class="calc-row"><span class="calc-label">Dealer Commission (2%)</span><span class="calc-val negative">PKR 7.2 Lakh</span></div>
+        <div class="calc-row"><span class="calc-label">Capital Gains Tax (5%)</span><span class="calc-val negative">PKR 18 Lakh</span></div>
+        <div class="calc-divider"></div>
+        <div class="calc-row"><span class="calc-label">Net Profit</span><span class="calc-val gold">PKR 39.8 Lakh (13.5% return)</span></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.3rem;color:var(--white);margin-bottom:16px;letter-spacing:0.04em;">Long-Term Rental Income Strategy</h3>
+      <div class="step-flow">
+        <div class="step" data-num="1">
+          <div class="step-title">Acquire a Rental Property</div>
+          <div class="step-desc">Target a 3–5 marla house or a commercial plaza unit. Ideal locations include Saddar commercial zones, main market strips, and DHA commercial areas.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">Tenant Selection Process</div>
+          <div class="step-desc">Conduct a background check, collect advance rent, and execute a notarized lease agreement. Protect the property from disputes by following proper legal protocols.</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">Annual Yield Calculation</div>
+          <div class="step-desc">Residential rental yield in Lahore: 3–5% per year. Commercial yield: 6–9% per year. Add an annual capital appreciation of 10–15% for total return calculation.</div>
+        </div>
+      </div>
+      <div class="calc-box">
+        <div class="calc-title">Rental Yield Example — Lahore Commercial Shop</div>
+        <div class="calc-row"><span class="calc-label">Shop Purchase Price</span><span class="calc-val negative">PKR 80 Lakh</span></div>
+        <div class="calc-row"><span class="calc-label">Monthly Rental Income</span><span class="calc-val positive">PKR 55,000 / month</span></div>
+        <div class="calc-row"><span class="calc-label">Annual Rental Income</span><span class="calc-val positive">PKR 6.6 Lakh</span></div>
+        <div class="calc-row"><span class="calc-label">Gross Annual Yield</span><span class="calc-val positive">8.25%</span></div>
+        <div class="calc-row"><span class="calc-label">Capital Appreciation (10 years)</span><span class="calc-val positive">PKR 1.2 Crore+</span></div>
+        <div class="calc-divider"></div>
+        <div class="calc-row"><span class="calc-label">10-Year Total Return</span><span class="calc-val gold">PKR 1.86 Crore</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-up" style="margin-top:32px;">
+    <h3 style="font-family:var(--display);font-size:1.3rem;color:var(--white);margin-bottom:20px;letter-spacing:0.04em;">High ROI Areas — Pakistan 2025</h3>
+    <table class="data-table">
+      <thead><tr><th>City</th><th>Area</th><th>Best Property Type</th><th>Expected ROI (3 Years)</th><th>Risk Level</th></tr></thead>
+      <tbody>
+        <tr><td>Lahore</td><td>DHA Phase 9–10 / EME Society</td><td>Residential Plot</td><td>35–50%</td><td><span class="badge badge-green">Low</span></td></tr>
+        <tr><td>Lahore</td><td>Bahria Orchard</td><td>5 Marla House</td><td>25–40%</td><td><span class="badge badge-green">Low</span></td></tr>
+        <tr><td>Karachi</td><td>DHA Phase 8</td><td>Commercial Unit</td><td>40–60%</td><td><span class="badge badge-gold">Medium</span></td></tr>
+        <tr><td>Islamabad</td><td>B-17 / Park View City</td><td>Residential Plot</td><td>30–45%</td><td><span class="badge badge-gold">Medium</span></td></tr>
+        <tr><td>Rawalpindi</td><td>Bahria Town Phase 7–8</td><td>Apartment</td><td>20–30%</td><td><span class="badge badge-green">Low</span></td></tr>
+        <tr><td>Gujranwala</td><td>Citi Housing Society</td><td>5 Marla Plot</td><td>25–35%</td><td><span class="badge badge-gold">Medium</span></td></tr>
+        <tr><td>Multan</td><td>New Multan / Master City</td><td>Residential Plot</td><td>20–28%</td><td><span class="badge badge-gold">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════ S3: SALE & PURCHASE ═══════ -->
+<section class="section fade-up" id="s3">
+  <div class="section-header">
+    <div class="section-num-big">03</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Legal Process</div>
+      <h2 class="section-title">Sale &amp; Purchase Procedure</h2>
+      <div class="section-sub">The complete 10-step legal process from verification to final transfer</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="step-flow fade-up">
+    <div class="step" data-num="1">
+      <div class="step-title">Step 1 — Property Ownership Verification</div>
+      <div class="step-desc">Verify the seller's CNIC against original documents including the Fard (title deed) and previous sale deed. Confirm the society's NOC. Check ownership history through NADRA or the PLRA online portal.</div>
+      <div class="step-note">⚠️ Never accept photocopies alone. Always demand original documents plus a certified copy before proceeding.</div>
+    </div>
+    <div class="step" data-num="2">
+      <div class="step-title">Step 2 — Fard Milkiat (Title Document) Verification</div>
+      <div class="step-desc">Obtain a Fard Milkiat from the PLRA (Punjab Land Records Authority) online portal or via FBR. Check for any co-owners, outstanding heirs, or active disputes. Confirm the current registered owner's name matches the seller.</div>
+    </div>
+    <div class="step" data-num="3">
+      <div class="step-title">Step 3 — Market Valuation</div>
+      <div class="step-desc">Apply the Comparable Sales Method: compare 5–8 recent transactions of similar properties in the same area over the last 3 months. Record both the FBR value and the prevailing market value — stamp duty is calculated on the FBR value.</div>
+    </div>
+    <div class="step" data-num="4">
+      <div class="step-title">Step 4 — Token Money (Advance / Bayana)</div>
+      <div class="step-desc">Collect 5–10% of the agreed price as token money. Issue a stamped receipt. Clearly define: if the buyer backs out, the token is forfeited; if the seller backs out, they return double the amount. Include a clear timeline in the token agreement.</div>
+      <div class="step-note">💡 For a PKR 1 Crore deal, the minimum token should be PKR 5–10 lakh. A low token signals a lack of buyer seriousness.</div>
+    </div>
+    <div class="step" data-num="5">
+      <div class="step-title">Step 5 — Agreement to Sell (Sale Agreement)</div>
+      <div class="step-desc">Have a lawyer draft a comprehensive sale agreement covering: full property description, agreed price, payment schedule, possession date, penalty clauses, and a dispute resolution mechanism. Execute on PKR 500–1,000 stamp paper.</div>
+    </div>
+    <div class="step" data-num="6">
+      <div class="step-title">Step 6 — Transfer Process</div>
+      <div class="step-desc">After full payment, file the transfer at the Sub-Registrar's office or the relevant society office. Both buyer and seller must be physically present with original CNICs and two witnesses.</div>
+    </div>
+    <div class="step" data-num="7">
+      <div class="step-title">Step 7 — Registry and Intiqal (Revenue Record Transfer)</div>
+      <div class="step-desc">Registry: The sale deed is formally registered at the Sub-Registrar's office. Intiqal: Ownership is transferred in the official revenue record via the Patwari or PLRA online system. Both steps are mandatory — ensure both are completed.</div>
+    </div>
+    <div class="step" data-num="8">
+      <div class="step-title">Step 8 — Stamp Duty and Applicable Taxes</div>
+      <div class="step-desc">Stamp Duty: 3% (paid by buyer). Capital Gains Tax: 1–5% (paid by seller, varies by holding period). Withholding Tax: 1% buyer + 1% seller (non-filers pay 2% each). Society transfer fee: 0.5–2% of property value.</div>
+    </div>
+    <div class="step" data-num="9">
+      <div class="step-title">Step 9 — Possession and Handover</div>
+      <div class="step-desc">Obtain a signed Possession Letter. Ensure the seller clears all outstanding utility bills (electricity, gas, water). Hand over keys and all original documents to the buyer. Transfer the WAPDA meter into the buyer's name.</div>
+    </div>
+    <div class="step" data-num="10">
+      <div class="step-title">Step 10 — Commission Collection</div>
+      <div class="step-desc">Standard commission in Pakistan: 1% from buyer and 1% from seller (some areas charge 2% each). Issue a formal receipt stating the property address, transaction amount, and both parties' CNICs. Retain a copy for your records.</div>
+    </div>
+  </div>
+
+  <div class="info-box warning fade-up">
+    <span class="info-box-icon">🚨</span>
+    <div class="info-box-text"><strong>Fraud Prevention — Critical Safeguards</strong>
+    (1) Always verify the Fard Milkiat through the official PLRA online portal — never rely on a document shown by the seller alone. (2) Accept token money and all payments via bank transfer or crossed cheque — avoid cash transactions. (3) Be alert to duplicate or forged documents — Patwari record manipulation is common in certain areas. (4) For Power of Attorney deals, verify the original PoA document with NADRA before proceeding. (5) For file or Form-B deals, confirm the society's NOC and the current transfer status before any payment.</div>
+  </div>
+</section>
+
+<!-- ═══════ S4: DAILY OPERATIONS ═══════ -->
+<section class="section fade-up" id="s4">
+  <div class="section-header">
+    <div class="section-num-big">04</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Workflow</div>
+      <h2 class="section-title">Daily Operations &amp; Workflow</h2>
+      <div class="section-sub">Lead generation, client management, negotiation, and deal closure</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="two-col fade-up">
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.2rem;color:var(--white);margin-bottom:16px;">Lead Generation</h3>
+      <div class="step-flow">
+        <div class="step" data-num="1">
+          <div class="step-title">Online Property Portals</div>
+          <div class="step-desc">Post fresh listings daily on Zameen.com, OLX.com.pk, and Graana.com. New listings generate significantly more calls. Aim to respond to all inquiries within 2 hours to maintain lead quality.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">WhatsApp Property Groups</div>
+          <div class="step-desc">Join area-specific WhatsApp property groups and share daily listings. Build a referral network by staying active in 10–15 relevant groups. Personal relationships in these groups convert at a much higher rate.</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">Facebook Lead Ads</div>
+          <div class="step-desc">Run location-based ads targeting DHA, Bahria, and specific housing societies. Budget: PKR 500–1,000 per day. Facebook Lead Form Ads are the most effective format for property inquiries. Expected cost per lead: PKR 200–800.</div>
+        </div>
+        <div class="step" data-num="4">
+          <div class="step-title">Professional Referral Network</div>
+          <div class="step-desc">Build relationships with bank home finance departments, lawyers, chartered accountants, and architects. Offer a referral fee of 0.25–0.5% per closed deal. These referrals carry very high conversion rates.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.2rem;color:var(--white);margin-bottom:16px;">Deal Closing Strategy</h3>
+      <div class="step-flow">
+        <div class="step" data-num="1">
+          <div class="step-title">Site Visit Preparation</div>
+          <div class="step-desc">Confirm the client's budget and specific requirements before the visit. Show a maximum of 3 options to avoid decision fatigue. Have property keys and all related files ready before the viewing appointment.</div>
+        </div>
+        <div class="step" data-num="2">
+          <div class="step-title">Negotiation Technique</div>
+          <div class="step-desc">Use the anchoring method: present a slightly higher price to the buyer while helping the seller accept a slightly lower one. Find the mutual middle ground. Use the close: "If I can get you this price, would you be ready to proceed today?"</div>
+        </div>
+        <div class="step" data-num="3">
+          <div class="step-title">Creating Honest Urgency</div>
+          <div class="step-desc">If genuinely true, communicate real urgency — such as other interested parties. Never fabricate urgency as it damages long-term reputation. Authentic urgency, when communicated clearly, accelerates decisions.</div>
+        </div>
+        <div class="step" data-num="4">
+          <div class="step-title">Collect Token on the Same Day</div>
+          <div class="step-desc">Once a deal is verbally agreed, collect the token money on the same day. Saying "let us confirm tomorrow" is the fastest way to lose a deal. Token money equals commitment from both parties.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-box fade-up" style="margin-top:24px;">
+    <div class="calc-title">Ideal Daily Schedule — Professional Property Agent</div>
+    <div class="calc-row"><span class="calc-label">9:00 AM – 10:00 AM</span><span class="calc-val">WhatsApp follow-ups + upload new listings on all portals</span></div>
+    <div class="calc-row"><span class="calc-label">10:00 AM – 1:00 PM</span><span class="calc-val">Cold calls, warm lead follow-ups, and confirmed site visits</span></div>
+    <div class="calc-row"><span class="calc-label">1:00 PM – 2:00 PM</span><span class="calc-val">CRM database updates + documentation and agreements</span></div>
+    <div class="calc-row"><span class="calc-label">2:00 PM – 5:00 PM</span><span class="calc-val">Client meetings, property showings, and active negotiations</span></div>
+    <div class="calc-row"><span class="calc-label">5:00 PM – 7:00 PM</span><span class="calc-val">Social media content creation + Facebook ads management</span></div>
+    <div class="calc-row"><span class="calc-label">Evening</span><span class="calc-val">Market research, competitor tracking, and next-day preparation</span></div>
+  </div>
+</section>
+
+<!-- ═══════ S5: MARKETING ═══════ -->
+<section class="section fade-up" id="s5">
+  <div class="section-header">
+    <div class="section-num-big">05</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Brand &amp; Leads</div>
+      <h2 class="section-title">Marketing Strategy</h2>
+      <div class="section-sub">Digital channels, local networking, and investor relationship management</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="card-grid fade-up">
+    <div class="card">
+      <span class="card-icon">📱</span>
+      <div class="card-title">Social Media Marketing</div>
+      <div class="card-text"><strong style="color:var(--gold2)">Facebook:</strong> Property tour videos, client testimonials, before/after renovation content. Post a minimum of 2 times daily.<br><strong style="color:var(--gold2)">Instagram:</strong> High-quality property photos and Reels for organic viral reach.<br><strong style="color:var(--gold2)">YouTube:</strong> Area guides and market update videos for long-term SEO benefit.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Facebook Ads Strategy</div>
+      <div class="card-text"><strong style="color:var(--gold2)">Target Audience:</strong> Age 28–55, household income PKR 50K+, residents of Lahore, Karachi, and Islamabad.<br><strong style="color:var(--gold2)">Monthly Budget:</strong> PKR 15,000–30,000.<br><strong style="color:var(--gold2)">Best Format:</strong> Lead Form ads for direct property inquiries. Retarget website visitors. Expected cost per lead: PKR 200–800.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">💬</span>
+      <div class="card-title">WhatsApp Marketing</div>
+      <div class="card-text">Set up a WhatsApp Business account and use the Catalog feature to showcase listings. Use Broadcast Lists (not groups) of 100–500 contacts each. Send weekly property market updates. WhatsApp delivers a 60%+ open rate — far higher than email.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌐</span>
+      <div class="card-title">Property Portals</div>
+      <div class="card-text"><strong style="color:var(--gold2)">Zameen.com:</strong> Pakistan's largest property portal. Pro account: PKR 5,000/month. Invest in featured and boosted listings for maximum exposure.<br><strong style="color:var(--gold2)">OLX / Graana:</strong> Free listings with paid boost options. Aangan.com is an emerging platform worth testing.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🤝</span>
+      <div class="card-title">Investor Relations</div>
+      <div class="card-text">Organize monthly investor meetup events. Deliver market update presentations with real data. Offer exclusive early-access deals to your registered investor database. Loyal investors generate repeat business and referrals — typically 30% of all annual income.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏘️</span>
+      <div class="card-title">Local Community Networking</div>
+      <div class="card-text">Join area-specific dealer associations. Build relationships through community gatherings and local social circles. Invest in high-quality business cards. Maintaining a strong relationship with housing society offices gives you early access to off-market listings.</div>
+    </div>
+  </div>
+
+  <div class="calc-box fade-up">
+    <div class="calc-title">Recommended Monthly Marketing Budget Allocation</div>
+    <div class="profit-bars">
+      <div class="pbar"><span class="pbar-label">Facebook / Instagram Advertising</span><div class="pbar-track"><div class="pbar-fill" data-width="59"></div></div><span class="pbar-val">PKR 20,000</span></div>
+      <div class="pbar"><span class="pbar-label">Zameen.com Pro Listing Subscription</span><div class="pbar-track"><div class="pbar-fill" data-width="15"></div></div><span class="pbar-val">PKR 5,000</span></div>
+      <div class="pbar"><span class="pbar-label">Graphic Design &amp; Content Creation</span><div class="pbar-track"><div class="pbar-fill" data-width="12"></div></div><span class="pbar-val">PKR 4,000</span></div>
+      <div class="pbar"><span class="pbar-label">Banners, Flex Boards &amp; Print</span><div class="pbar-track"><div class="pbar-fill" data-width="9"></div></div><span class="pbar-val">PKR 3,000</span></div>
+      <div class="pbar"><span class="pbar-label">Networking Events &amp; Meetings</span><div class="pbar-track"><div class="pbar-fill" data-width="6"></div></div><span class="pbar-val">PKR 2,000</span></div>
+    </div>
+    <div class="calc-row"><span class="calc-label">Total Monthly Marketing Budget</span><span class="calc-val gold">PKR 34,000 / month</span></div>
+  </div>
+</section>
+
+<!-- ═══════ S6: PROFIT MODEL ═══════ -->
+<section class="section fade-up" id="s6">
+  <div class="section-header">
+    <div class="section-num-big">06</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Revenue</div>
+      <h2 class="section-title">Profit Model &amp; Revenue Streams</h2>
+      <div class="section-sub">Multiple income channels and Year-1 financial projections</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="three-col fade-up">
+    <div class="calc-box">
+      <div class="calc-title">Stream 1 — Commission Income</div>
+      <div class="calc-row"><span class="calc-label">Average deal size</span><span class="calc-val">PKR 80 Lakh</span></div>
+      <div class="calc-row"><span class="calc-label">Commission rate</span><span class="calc-val">2% (1% each side)</span></div>
+      <div class="calc-row"><span class="calc-label">Commission per deal</span><span class="calc-val positive">PKR 1.6 Lakh</span></div>
+      <div class="calc-row"><span class="calc-label">Deals per month (team of 3)</span><span class="calc-val">8–12 deals</span></div>
+      <div class="calc-divider"></div>
+      <div class="calc-row"><span class="calc-label">Monthly Commission Income</span><span class="calc-val gold">PKR 13–19 Lakh</span></div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-title">Stream 2 — Property Flip Profit</div>
+      <div class="calc-row"><span class="calc-label">Investment per flip</span><span class="calc-val">PKR 50 Lakh</span></div>
+      <div class="calc-row"><span class="calc-label">Holding period</span><span class="calc-val">8–12 months</span></div>
+      <div class="calc-row"><span class="calc-label">Expected net return</span><span class="calc-val">15–25%</span></div>
+      <div class="calc-divider"></div>
+      <div class="calc-row"><span class="calc-label">Profit per flip</span><span class="calc-val gold">PKR 7.5–12.5 Lakh</span></div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-title">Stream 3 — Rental Portfolio</div>
+      <div class="calc-row"><span class="calc-label">3 rental units owned</span><span class="calc-val">PKR 3 Crore total</span></div>
+      <div class="calc-row"><span class="calc-label">Monthly rent per unit</span><span class="calc-val positive">PKR 60,000 avg.</span></div>
+      <div class="calc-row"><span class="calc-label">Total monthly rental income</span><span class="calc-val positive">PKR 1.8 Lakh</span></div>
+      <div class="calc-divider"></div>
+      <div class="calc-row"><span class="calc-label">Annual Gross Yield</span><span class="calc-val gold">7.2% per annum</span></div>
+    </div>
+  </div>
+
+  <div class="calc-box fade-up" style="margin-top:8px;">
+    <div class="calc-title">Year-1 Realistic Revenue Projection — New Company</div>
+    <div class="calc-row"><span class="calc-label">Q1 Commission Income (ramp-up phase)</span><span class="calc-val positive">PKR 8 Lakh</span></div>
+    <div class="calc-row"><span class="calc-label">Q2 Commission Income (gaining momentum)</span><span class="calc-val positive">PKR 18 Lakh</span></div>
+    <div class="calc-row"><span class="calc-label">Q3 Commission Income (established)</span><span class="calc-val positive">PKR 28 Lakh</span></div>
+    <div class="calc-row"><span class="calc-label">Q4 Commission Income (full capacity)</span><span class="calc-val positive">PKR 38 Lakh</span></div>
+    <div class="calc-row"><span class="calc-label">Total Year-1 Commission Revenue</span><span class="calc-val positive">PKR 92 Lakh</span></div>
+    <div class="calc-divider"></div>
+    <div class="calc-row"><span class="calc-label">Total Operating Expenses (staff, rent, marketing)</span><span class="calc-val negative">PKR 42 Lakh</span></div>
+    <div class="calc-row"><span class="calc-label">Year-1 Net Profit</span><span class="calc-val gold">PKR 50 Lakh (54% profit margin)</span></div>
+  </div>
+</section>
+
+<!-- ═══════ S7: RISK MANAGEMENT ═══════ -->
+<section class="section fade-up" id="s7">
+  <div class="section-header">
+    <div class="section-num-big">07</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Protection</div>
+      <h2 class="section-title">Risk Management</h2>
+      <div class="section-sub">Identifying, assessing, and mitigating the key risks in property business</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="risk-grid fade-up">
+    <div class="risk-card high">
+      <div class="risk-level">🔴 High Risk</div>
+      <div class="risk-title">Fraudulent Documents</div>
+      <div class="risk-desc">Forged Fard, altered signatures, and seller impersonation are common in Pakistan. Prevention: Always verify ownership via the PLRA online portal, and obtain a written legal opinion before paying any token money.</div>
+    </div>
+    <div class="risk-card high">
+      <div class="risk-level">🔴 High Risk</div>
+      <div class="risk-title">Market Crash / Downturn</div>
+      <div class="risk-desc">Political instability, interest rate hikes, or IMF-related economic conditions can suppress property values. Prevention: Never over-leverage. Always maintain a 20% cash reserve. Diversify your portfolio across multiple cities.</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-level">🟡 Medium Risk</div>
+      <div class="risk-title">Litigation and Legal Disputes</div>
+      <div class="risk-desc">Inheritance claims and court stay orders can freeze properties. Prevention: Always conduct a title search and obtain a lawyer's no-objection certificate before purchase. Pay a premium for legally clear properties — it is worth it.</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-level">🟡 Medium Risk</div>
+      <div class="risk-title">Cash Flow Crisis</div>
+      <div class="risk-desc">Delayed commission payments combined with fixed overheads can create negative cash flow. Prevention: Maintain a 3-month operating expense reserve at all times. Avoid locking all capital in illiquid property assets.</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-level">🟡 Medium Risk</div>
+      <div class="risk-title">Staff Misconduct</div>
+      <div class="risk-desc">Agents bypassing the company to close deals independently is a common problem. Prevention: Include non-compete clauses in employment contracts, restrict CRM access appropriately, and structure commission splits to make company loyalty the most profitable option for agents.</div>
+    </div>
+    <div class="risk-card low">
+      <div class="risk-level">🟢 Low Risk</div>
+      <div class="risk-title">Market Competition</div>
+      <div class="risk-desc">High dealer density in popular areas reduces individual deal flow. Prevention: Specialize in a specific niche — a single housing society, a particular property type, or a target client segment. Brand differentiation through genuine expertise is more valuable than competing on price.</div>
+    </div>
+  </div>
+
+  <div class="info-box success fade-up">
+    <span class="info-box-icon">🛡️</span>
+    <div class="info-box-text"><strong>Investor Protection Framework</strong>
+    Sign a formal MOU with every investor before accepting any funds. Accept investment amounts exclusively via bank transfer and provide a written receipt. Send monthly written progress updates to all investors. Structure the legal relationship through a Limited Partnership Agreement prepared by a qualified lawyer. All profit and loss sharing terms must be explicitly defined and agreed in writing before any capital is deployed.</div>
+  </div>
+</section>
+
+<!-- ═══════ S8: GROWTH PLAN ═══════ -->
+<section class="section fade-up" id="s8">
+  <div class="section-header">
+    <div class="section-num-big">08</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Future</div>
+      <h2 class="section-title">Professional Growth Plan</h2>
+      <div class="section-sub">Quarterly roadmap for Year 1 and a 5-year expansion vision</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="roadmap fade-up">
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Q1</div>
+      <div class="roadmap-period">Month 1–3</div>
+      <div class="roadmap-title">Foundation Phase</div>
+      <div class="roadmap-desc">Complete company registration, set up the office, hire 2 agents, launch social media pages, and post your first 5–8 listings. Target: 3–5 closed deals.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Q2</div>
+      <div class="roadmap-period">Month 4–6</div>
+      <div class="roadmap-title">Momentum Phase</div>
+      <div class="roadmap-desc">Launch Facebook ads, activate Zameen.com Pro, grow to 4–5 agents, implement a CRM system. Target: 8–12 deals per month and PKR 8+ lakh in monthly commission.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Q3</div>
+      <div class="roadmap-period">Month 7–9</div>
+      <div class="roadmap-title">Scaling Phase</div>
+      <div class="roadmap-desc">Make your first flip investment, launch a formal referral system, and build an investor database of 50+ contacts. Target: PKR 15+ lakh per month in total revenue.</div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">Q4</div>
+      <div class="roadmap-period">Month 10–12</div>
+      <div class="roadmap-title">Brand Phase</div>
+      <div class="roadmap-desc">Establish a recognized brand, begin planning a second branch, form developer partnerships, and start building your rental portfolio. Target: PKR 25+ lakh per month.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);font-size:1.3rem;color:var(--white);margin:32px 0 16px;letter-spacing:0.04em;">5-Year Expansion Vision</h3>
+  <table class="data-table fade-up">
+    <thead><tr><th>Year</th><th>Strategic Focus</th><th>Team Size</th><th>Revenue Target</th><th>Key Milestone</th></tr></thead>
+    <tbody>
+      <tr><td>Year 1</td><td>Establish Brand &amp; Learn the Market</td><td>5–7 people</td><td>PKR 50–80 Lakh</td><td><span class="badge badge-gold">Brand Launch</span></td></tr>
+      <tr><td>Year 2</td><td>Scale Sales Operations</td><td>10–15 people</td><td>PKR 1.5–2 Crore</td><td><span class="badge badge-gold">2nd Branch Opened</span></td></tr>
+      <tr><td>Year 3</td><td>Diversify &amp; Start Investing</td><td>20–25 people</td><td>PKR 3–4 Crore</td><td><span class="badge badge-green">First JV Development</span></td></tr>
+      <tr><td>Year 4</td><td>Launch Development Wing</td><td>35–40 people</td><td>PKR 6–8 Crore</td><td><span class="badge badge-green">Own Construction Project</span></td></tr>
+      <tr><td>Year 5</td><td>Portfolio Growth &amp; Brand Dominance</td><td>50+ people</td><td>PKR 12–20 Crore</td><td><span class="badge badge-blue">Multi-City Presence</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════ COMMISSION CALCULATOR ═══════ -->
+<section class="section fade-up" id="calc">
+  <div class="section-header">
+    <div class="section-num-big">₨</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Interactive Tool</div>
+      <h2 class="section-title">Commission Calculator</h2>
+      <div class="section-sub">Enter deal details to instantly calculate commissions, taxes, and net figures</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="interactive-calc fade-up">
+    <div style="font-family:var(--display);font-size:1rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:20px;font-weight:700;">REAL-TIME DEAL CALCULATOR</div>
+    <div class="calc-form">
+      <div class="form-group">
+        <label class="form-label">Property Sale Price (PKR)</label>
+        <input class="form-input" type="number" id="salePrice" value="8000000" oninput="calcCommission()" placeholder="8,000,000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Commission Rate (%)</label>
+        <input class="form-input" type="number" id="commRate" value="2" step="0.5" oninput="calcCommission()" placeholder="2">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Share of Commission (%)</label>
+        <input class="form-input" type="number" id="agentShare" value="60" oninput="calcCommission()" placeholder="60">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Property Holding Period (Months)</label>
+        <input class="form-input" type="number" id="holdMonths" value="8" oninput="calcCommission()" placeholder="8">
+      </div>
+    </div>
+    <div class="calc-output">
+      <div class="output-grid">
+        <div class="output-item">
+          <div class="output-label">Total Commission Earned</div>
+          <div class="output-val" id="totalComm">PKR 1,60,000</div>
+        </div>
+        <div class="output-item">
+          <div class="output-label">Your Personal Earning</div>
+          <div class="output-val" id="yourEarn">PKR 96,000</div>
+        </div>
+        <div class="output-item">
+          <div class="output-label">Company Retained Share</div>
+          <div class="output-val" id="compShare">PKR 64,000</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border2);display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div class="output-item">
+          <div class="output-label">Stamp Duty — Buyer (3%)</div>
+          <div class="output-val" id="stampDuty" style="color:#fca5a5;font-size:1rem;">PKR 2,40,000</div>
+        </div>
+        <div class="output-item">
+          <div class="output-label">Withholding Tax — Buyer (1%)</div>
+          <div class="output-val" id="whtBuyer" style="color:#fca5a5;font-size:1rem;">PKR 80,000</div>
+        </div>
+        <div class="output-item">
+          <div class="output-label">Total Cost to Buyer (incl. taxes)</div>
+          <div class="output-val" id="netBuyer" style="font-size:1rem;">PKR 83,20,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DUE DILIGENCE CHECKLIST ═══════ -->
+<section class="section fade-up" id="checklist">
+  <div class="section-header">
+    <div class="section-num-big">✓</div>
+    <div class="section-title-group">
+      <div class="section-eyebrow">Interactive Tool</div>
+      <h2 class="section-title">Due Diligence Checklist</h2>
+      <div class="section-sub">Click each item to track your pre-purchase verification progress</div>
+    </div>
+  </div>
+  <div class="gold-divider"></div>
+
+  <div class="two-col fade-up">
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.1rem;color:var(--gold2);margin-bottom:12px;letter-spacing:0.06em;">Before Buying — Legal Checks</h3>
+      <div class="checklist">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Fard Milkiat verified through the official PLRA online portal</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Seller's CNIC and original title documents reviewed in person</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">No active court case, lien, or mortgage confirmed</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Society NOC and Completion Certificate obtained and verified</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Succession Certificate obtained if property was inherited</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Power of Attorney verified with NADRA if applicable</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Written title opinion letter received from a qualified lawyer</div></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:var(--display);font-size:1.1rem;color:var(--gold2);margin-bottom:12px;letter-spacing:0.06em;">Before Buying — Physical Checks</h3>
+      <div class="checklist">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Physical site visit completed and photographs taken</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Access road confirmed as paved and fully functional</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Property size physically measured or confirmed by a surveyor</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Utility connections confirmed — electricity, gas, and water</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">No encroachment or neighboring boundary dispute present</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Property is not in a flood zone or low-lying area — LDA map checked</div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Local development plan reviewed to assess future value potential</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="checklist-progress" style="margin-top:20px;padding:16px 20px;background:var(--dark3);border:1px solid var(--border2);border-radius:4px;display:flex;align-items:center;gap:16px;">
+    <div style="font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--gold2)" id="check-count">0/14</div>
+    <div style="flex:1;">
+      <div style="font-size:0.65rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;">Due Diligence Completion</div>
+      <div style="height:6px;background:var(--dark4);border-radius:3px;overflow:hidden;"><div id="check-bar" style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;transition:width 0.4s;border-radius:3px;"></div></div>
+    </div>
+    <div id="check-status" style="font-size:0.72rem;color:var(--muted);font-family:var(--body);">Incomplete — Do Not Proceed</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:48px 60px;border-top:1px solid var(--border2);background:var(--dark2);">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;max-width:900px;">
+    <div>
+      <div style="font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:6px;">PropMaster Pro</div>
+      <div style="font-size:0.65rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;">Pakistan Real Estate — Complete Professional Guide</div>
+      <div style="font-size:0.8rem;color:var(--gold);margin-top:8px;font-family:var(--display);font-style:italic;">Building Successful Property Businesses in Pakistan</div>
+    </div>
+    <div style="font-size:0.72rem;color:var(--muted);line-height:1.8;max-width:380px;">
+      This guide is for educational and professional reference purposes only. Always consult a licensed lawyer, a chartered accountant, and a RERA-registered advisor before entering into any major property transactions. Property laws and tax rates vary by province and are subject to change.
+    </div>
+  </div>
+  <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border2);font-size:0.6rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;text-align:center;">
+    PropMaster Pro © 2025 — All 8 Modules: Company Formation · Investment Strategy · Sale &amp; Purchase · Daily Operations · Marketing · Profit Model · Risk Management · Growth Plan
+  </div>
+</footer>
+
+</div><!-- /main -->
+
+<script>
+/* ── SIDEBAR ── */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+document.getElementById('main').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+});
+
+/* ── ACTIVE NAV TRACKING ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-item');
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+/* ── FADE UP ON SCROLL ── */
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+/* ── STEP ANIMATION ── */
+const stepObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.step').forEach((s, i) => {
+        setTimeout(() => s.classList.add('visible'), i * 100);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step-flow').forEach(f => stepObserver.observe(f));
+
+/* ── PROFIT BARS ── */
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.pbar-fill').forEach(bar => {
+        const w = bar.getAttribute('data-width');
+        setTimeout(() => bar.style.width = w + '%', 200);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.profit-bars').forEach(el => barObserver.observe(el));
+
+/* ── TABS ── */
+function switchTab(btn, id) {
+  const parent = btn.closest('.tabs');
+  parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+/* ── COMMISSION CALCULATOR ── */
+function calcCommission() {
+  const price = parseFloat(document.getElementById('salePrice').value) || 0;
+  const rate  = parseFloat(document.getElementById('commRate').value) || 2;
+  const share = parseFloat(document.getElementById('agentShare').value) || 60;
+
+  const total     = price * rate / 100;
+  const agent     = total * share / 100;
+  const company   = total - agent;
+  const stamp     = price * 0.03;
+  const wht       = price * 0.01;
+  const totalCost = price + stamp + wht;
+
+  const fmt = n => 'PKR ' + Math.round(n).toLocaleString('en-PK');
+
+  document.getElementById('totalComm').textContent = fmt(total);
+  document.getElementById('yourEarn').textContent  = fmt(agent);
+  document.getElementById('compShare').textContent = fmt(company);
+  document.getElementById('stampDuty').textContent = fmt(stamp);
+  document.getElementById('whtBuyer').textContent  = fmt(wht);
+  document.getElementById('netBuyer').textContent  = fmt(totalCost);
+}
+
+calcCommission();
+
+/* ── CHECKLIST ── */
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
+  updateCheckProgress();
+}
+
+function updateCheckProgress() {
+  const all     = document.querySelectorAll('.check-item').length;
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  const pct     = Math.round(checked / all * 100);
+
+  document.getElementById('check-count').textContent = `${checked}/${all}`;
+  document.getElementById('check-bar').style.width = pct + '%';
+
+  const status = document.getElementById('check-status');
+  if (pct === 100)      { status.textContent = '✅ Complete — Safe to Proceed';      status.style.color = '#6ee7a0'; }
+  else if (pct >= 70)   { status.textContent = '⚠️ Almost Ready — Review Remaining'; status.style.color = 'var(--gold2)'; }
+  else if (pct >= 40)   { status.textContent = '🔄 In Progress — Keep Going';        status.style.color = '#93c5fd'; }
+  else                  { status.textContent = '❌ Incomplete — Do Not Proceed Yet';  status.style.color = '#fca5a5'; }
+}
+</script>
+</body>
+</html>
